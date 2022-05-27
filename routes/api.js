@@ -3,19 +3,16 @@ const router = express.Router();
 
 router.post('/number', (req, res) => {
     const { nums, target } = req.body
-    function getIndex(arr, taget) {
+    function getIndex(arr, target) {
         for (let i = 0; i < arr.length; i++) {
-            for (let j = 1; j < arr.length; j++) {
-                if (arr[i] + arr[j] === taget) {
-                    return [i, j]
-                }
+            for (let j = 0; j < arr.length; j++) {
+                if (arr[i] + arr[j] === target && i !== j) return [i, j]
             }
         }
+        return []
     }
-
     const result = getIndex(nums, target)
     res.send({ state: true, result: result })
-
 })
 
 router.post('/exchange', (req, res) => {
